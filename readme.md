@@ -15,9 +15,9 @@ export const decodeBase58Address = (
 };
 ```
 
-Most application can simply call `decodeBase58Address(address)` to automatically use the default, WASM-based `sha256` implementation (`internalSha256`). See [`src/app-default.js`](./src/app-default.js).
+Most applications can call `decodeBase58Address(address)` to automatically use the default, WASM-based `sha256` implementation (`internalSha256`). See [`src/app-default.js`](./src/app-default.js).
 
-Applications that already have another `sha256` implementation can provide that implementation as the second parameter: `decodeBase58Address(address, mySha256Implementation)`. In this case, the default parameter (`internalSha256`) is dead code, and should be possible to eliminate from the application's bundle (commonly called [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) in the JavaScript ecosystem). See [`src/app-shakable.js`](./src/app-shakable.js).
+Applications that already have another `sha256` implementation can provide that implementation as the second parameter: `decodeBase58Address(address, mySha256Implementation)`. In this case, the default parameter (`internalSha256`) is dead code and should be possible to eliminate from the application's bundle (commonly called [tree shaking](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking) in the JavaScript ecosystem). See [`src/app-shakable.js`](./src/app-shakable.js).
 
 ## Bundler Support
 
@@ -25,12 +25,12 @@ This repo tests dead-code elimination of unused default parameters as used in Li
 
 Currently, **dead-code elimination of unused default parameters** is not support by any known bundler.
 
-| Bundler                                 |                      Support                       | Issue |
-| --------------------------------------- | :------------------------------------------------: | ----- |
-| [`esbuild`](https://esbuild.github.io/) | ❌ ([example](./bundlers/esbuild/app-shakable.js)) |       |
-| [`parcel`](https://parceljs.org/)       | ❌ ([example](./bundlers/parcel/app-shakable.js))  |       |
-| [`rollup`](https://rollupjs.org/)       | ❌ ([example](./bundlers/rollup/app-shakable.js))  |       |
-| [`webpack`](https://webpack.js.org/)    |    ❌ ([example](./bundlers/webpack/main.mjs))     |       |
+| Bundler                                 |                      Support                       | Issue                                                                                |
+| --------------------------------------- | :------------------------------------------------: | ------------------------------------------------------------------------------------ |
+| [`esbuild`](https://esbuild.github.io/) | ❌ ([example](./bundlers/esbuild/app-shakable.js)) | [`evanw/esbuild#2185`](https://github.com/evanw/esbuild/issues/2185)                 |
+| [`parcel`](https://parceljs.org/)       | ❌ ([example](./bundlers/parcel/app-shakable.js))  | [`parcel-bundler/parcel#7961`](https://github.com/parcel-bundler/parcel/issues/7961) |
+| [`rollup`](https://rollupjs.org/)       | ❌ ([example](./bundlers/rollup/app-shakable.js))  | [`rollup/rollup#4466`](https://github.com/rollup/rollup/issues/4466)                 |
+| [`webpack`](https://webpack.js.org/)    |    ❌ ([example](./bundlers/webpack/main.mjs))     | [`webpack/webpack#15671`](https://github.com/webpack/webpack/issues/15671)           |
 
 This simpler example may also be useful for quickly testing support in bundlers:
 
