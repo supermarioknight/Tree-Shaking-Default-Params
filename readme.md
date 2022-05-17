@@ -23,14 +23,15 @@ Applications that already have another `sha256` implementation can provide that 
 
 This repo tests dead-code elimination of unused default parameters as used in Libauth (with asynchronously instantiated WASM implementations): [`src/app-shakable.js`](./src/app-shakable.js).
 
-Currently, **dead-code elimination of unused default parameters** is not support by any known bundler.
+Currently, **dead-code elimination of unused default parameters** is only supported by [Rollup](https://rollupjs.org/).
 
-| Bundler                                 |                      Support                       | Issue                                                                                |
-| --------------------------------------- | :------------------------------------------------: | ------------------------------------------------------------------------------------ |
-| [`esbuild`](https://esbuild.github.io/) | ❌ ([example](./bundlers/esbuild/app-shakable.js)) | [`evanw/esbuild#2185`](https://github.com/evanw/esbuild/issues/2185)                 |
-| [`parcel`](https://parceljs.org/)       | ❌ ([example](./bundlers/parcel/app-shakable.js))  | [`parcel-bundler/parcel#7961`](https://github.com/parcel-bundler/parcel/issues/7961) |
-| [`rollup`](https://rollupjs.org/)       | ❌ ([example](./bundlers/rollup/app-shakable.js))  | [`rollup/rollup#4466`](https://github.com/rollup/rollup/issues/4466)                 |
-| [`webpack`](https://webpack.js.org/)    |    ❌ ([example](./bundlers/webpack/main.mjs))     | [`webpack/webpack#15671`](https://github.com/webpack/webpack/issues/15671)           |
+| Bundler                                 |                      Support                       | Issue                                                                                | PR                                                                 |
+| --------------------------------------- | :------------------------------------------------: | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| [`esbuild`](https://esbuild.github.io/) | ❌ ([example](./bundlers/esbuild/app-shakable.js)) | [`evanw/esbuild#2185`](https://github.com/evanw/esbuild/issues/2185)                 | -                                                                  |
+| [`parcel`](https://parceljs.org/)       | ❌ ([example](./bundlers/parcel/app-shakable.js))  | [`parcel-bundler/parcel#7961`](https://github.com/parcel-bundler/parcel/issues/7961) | -                                                                  |
+| [`rollup`](https://rollupjs.org/)       | ⏳ ([example](./bundlers/rollup/app-shakable.js))  | [`rollup/rollup#4466`](https://github.com/rollup/rollup/issues/4466)                 | [`rollup/rollup#4498`](https://github.com/rollup/rollup/pull/4498) |
+| [`terser`](https://terser.org/)         | ❌ ([example](./bundlers/terser/app-shakable.js))  | [`terser/terser#1199`](https://github.com/terser/terser/issues/1199)                 | -                                                                  |
+| [`webpack`](https://webpack.js.org/)    |    ❌ ([example](./bundlers/webpack/main.mjs))     | [`webpack/webpack#15671`](https://github.com/webpack/webpack/issues/15671)           | -                                                                  |
 
 This simpler example may also be useful for quickly testing support in bundlers:
 

@@ -40,6 +40,10 @@ const rollup = run('bundlers/rollup/app-shakable.js');
 assertEqual(expected, rollup, 'rollup logged unexpected output');
 console.log('✅ rollup');
 
+const terser = run('bundlers/terser/app-shakable.js');
+assertEqual(expected, terser, 'terser logged unexpected output');
+console.log('✅ terser');
+
 const webpack = run('bundlers/webpack/main.mjs');
 assertEqual(expected, webpack, 'webpack logged unexpected output');
 console.log('✅ webpack');

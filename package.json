@@ -5,12 +5,12 @@
   "sideEffects": false,
   "source": "src/app-shakable.js",
   "module": "bundlers/parcel/app-shakable.js",
-  "dependencies": {},
   "devDependencies": {
     "esbuild": "^0.14.36",
     "parcel": "^2.4.1",
     "prettier": "^2.6.2",
     "rollup": "^2.70.2",
+    "terser": "^5.13.1",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
   },
@@ -18,9 +18,10 @@
     "run:default": "node src/app-default.js",
     "run:shaken": "node src/app-shakable.js",
     "build": "npm run build:parcel && npm run build:rollup && npm run build:esbuild && npm run build:webpack",
-    "build:parcel": "parcel build",
-    "build:rollup": "rollup src/app-shakable.js --file bundlers/rollup/app-shakable.js --format es --sourcemap",
     "build:esbuild": "esbuild --bundle src/app-shakable.js --outfile=bundlers/esbuild/app-shakable.js --format=esm --sourcemap",
+    "build:parcel": "parcel build",
+    "build:terser": "terser bundlers/parcel/app-shakable.js --module --compress --output=bundlers/terser/app-shakable.js",
+    "build:rollup": "rollup src/app-shakable.js --file bundlers/rollup/app-shakable.js --format es --sourcemap",
     "build:webpack": "webpack --entry ./src/app-shakable.js --output-path=bundlers/webpack --config bundlers/webpack/webpack.config.js",
     "test": "npm run build && if [ `git status bundlers --porcelain | head -c1 | wc -c` -gt 0 ]; then echo \"Error: one or more builds are outdated. Please review and commit the changes in bundlers.\" && false; fi && echo \"Bundles are up to date.\" && node test.js"
   },
